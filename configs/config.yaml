@@ -1,0 +1,40 @@
+data:
+  csv_path: data/raw.csv
+  target: Churn
+  test_size: 0.2
+  random_state: 42
+
+features:
+  numeric:
+    - tenure
+    - MonthlyCharges
+    - TotalCharges
+  categorical:
+    - gender
+    - SeniorCitizen
+    - Partner
+    - Dependents
+    - PhoneService
+    - MultipleLines
+    - InternetService
+    - OnlineSecurity
+    - OnlineBackup
+    - DeviceProtection
+    - TechSupport
+    - StreamingTV
+    - StreamingMovies
+    - Contract
+    - PaperlessBilling
+    - PaymentMethod
+
+model:
+  type: logreg  # or "random_forest"
+  params:
+    C: [0.1, 1.0, 10.0]
+    penalty: ["l2"]
+    solver: ["lbfgs", "liblinear"]
+
+cv:
+  strategy: StratifiedKFold
+  n_splits: 5
+  scoring: roc_auc
